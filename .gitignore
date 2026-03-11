@@ -1,0 +1,37 @@
+# Virtual environment
+.venv/
+
+# Python
+dist/
+__pycache__/
+*.py[cod]
+
+# Testing
+.pytest_cache/
+
+# Emacs
+*~
+
+# VS Code
+.vscode
+
+# MacOS
+.DS_store
+
+# Drawing tools
+*.bkp
+
+# Marimo
+__marimo__
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+src/faw/static/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
