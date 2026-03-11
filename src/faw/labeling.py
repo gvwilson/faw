@@ -27,7 +27,7 @@ class LabelingWidget(anywidget.AnyWidget):
     correct_labels = traitlets.Dict().tag(sync=True)
     value = traitlets.Dict(default_value=None, allow_none=True).tag(sync=True)
 
-    def __init__(self, question, labels, text_lines, correct_labels, **kwargs):
+    def __init__(self, question: str, labels: list[str], text_lines: list[str], correct_labels: dict, **kwargs):
         """
         Initialize a labeling widget.
 

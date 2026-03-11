@@ -27,7 +27,7 @@ class OrderingWidget(anywidget.AnyWidget):
     shuffle = traitlets.Bool(True).tag(sync=True)
     value = traitlets.Dict(default_value=None, allow_none=True).tag(sync=True)
 
-    def __init__(self, question, items, shuffle=True, **kwargs):
+    def __init__(self, question: str, items: list[str], shuffle: bool = True, **kwargs):
         """
         Initialize an ordering widget.
 

@@ -27,7 +27,7 @@ class MatchingWidget(anywidget.AnyWidget):
     correct_matches = traitlets.Dict().tag(sync=True)
     value = traitlets.Dict(default_value=None, allow_none=True).tag(sync=True)
 
-    def __init__(self, question, left, right, correct_matches, **kwargs):
+    def __init__(self, question: str, left: list[str], right: list[str], correct_matches: dict, **kwargs):
         """
         Initialize a matching widget.
 

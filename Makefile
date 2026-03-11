@@ -22,10 +22,25 @@ clean:
 	@find . -path './.venv' -prune -o -type d -name '__pycache__' -exec rm -rf {} +
 	@find . -path './.venv' -prune -o -type f -name '*~' -exec rm {} +
 
+## docs: build documentation
+docs:
+	@mkdocs build
+	@touch docs/.nojekyll
+	@cp etc/docs-requirements.txt docs/requirements.txt
+
 ## fix: fix formatting and code issues
 fix:
 	@ruff format .
 	@ruff check --fix .
+
+## publish: publish using ~/.pypirc credentials
+publish:
+	twine upload --verbose dist/*
+
+## setup: complete installation of development dependencies
+setup:
+	@uv sync --dev
+	@cd js && npm install
 
 ## test: run Python tests
 test:

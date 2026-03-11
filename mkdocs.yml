@@ -1,0 +1,36 @@
+site_name: faw
+docs_dir: pages
+site_dir: docs
+
+theme:
+  name: material
+
+nav:
+  - index.md
+  - API:
+    - concept_map.md
+    - flashcard.md
+    - labeling.md
+    - matching.md
+    - multiple_choice.md
+    - ordering.md
+  - Project:
+    - license.md
+    - conduct.md
+    - contributing.md
+
+plugins:
+- mkdocstrings:
+    handlers:
+      python:
+        paths:
+          - src
+
+markdown_extensions:
+- markdown_include.include:
+    base_path: docs
+- pymdownx.highlight
+- pymdownx.superfences
+
+exclude_docs: >
+  *~

@@ -27,7 +27,7 @@ class MultipleChoiceWidget(anywidget.AnyWidget):
     explanation = traitlets.Unicode("").tag(sync=True)
     value = traitlets.Dict(default_value=None, allow_none=True).tag(sync=True)
 
-    def __init__(self, question, options, correct_answer, explanation="", **kwargs):
+    def __init__(self, question: str, options: list[str], correct_answer: int, explanation: str = "", **kwargs):
         """
         Initialize a multiple choice widget.
 
