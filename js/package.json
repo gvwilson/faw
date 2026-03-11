@@ -1,6 +1,6 @@
 {
   "name": "faw-js",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "JavaScript modules for formative assessment widgets",
   "type": "module",
   "scripts": {

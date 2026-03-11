@@ -7,7 +7,7 @@ from .matching import MatchingWidget
 from .multiple_choice import MultipleChoiceWidget
 from .ordering import OrderingWidget
 
-__version__ = "0.5.0"
+__version__ = "0.6.0"
 __all__ = [
     "ConceptMapWidget",
     "FlashcardWidget",
