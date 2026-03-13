@@ -28,9 +28,10 @@ class ConceptMapWidget(anywidget.AnyWidget):
     correct_edges = traitlets.List().tag(sync=True)
     value = traitlets.Dict(default_value=None, allow_none=True).tag(sync=True)
 
-    def __init__(self, question: str, concepts: list[str], terms: list[str], correct_edges: list[dict], **kwargs):
+    def __init__(self, question: str, concepts: list[str], terms: list[str],
+                 correct_edges: list[dict] | None = None, **kwargs):
         super().__init__(**kwargs)
         self.question = question
         self.concepts = concepts
         self.terms = terms
-        self.correct_edges = correct_edges
+        self.correct_edges = correct_edges if correct_edges is not None else []
