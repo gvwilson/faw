@@ -137,3 +137,36 @@
 .faw-cm-edge-label { padding: 2px 8px; background: var(--accent); border-radius: 10px; font-size: 0.85em; font-weight: 500; }
 .faw-cm-edge-remove { margin-left: auto; background: none; border: none; cursor: pointer; color: var(--muted-foreground); padding: 2px 4px; border-radius: 4px; }
 .faw-cm-edge-remove:hover { color: #dc3545; background: #f8d7da; }
+
+.faw-annotation-area { display: grid; grid-template-columns: 180px 1fr; gap: 16px; margin-bottom: 16px; }
+.faw-annotation-labels { display: flex; flex-direction: column; gap: 8px; }
+.faw-annotation-chip {
+  display: flex; align-items: center; gap: 8px; padding: 6px 10px;
+  background: var(--accent); border: 2px solid var(--border); border-radius: var(--radius);
+  cursor: grab; user-select: none;
+}
+.faw-annotation-chip:active { cursor: grabbing; }
+.faw-annotation-chip.faw-dragging { opacity: 0.5; }
+.faw-annotation-image-wrapper {
+  position: relative; border: 2px solid var(--border); border-radius: var(--radius); overflow: hidden;
+}
+.faw-annotation-image-wrapper.faw-drop-target { border-color: #fbc02d; box-shadow: inset 0 0 0 2px #fbc02d; }
+.faw-annotation-img { display: block; width: 100%; height: auto; pointer-events: none; user-select: none; }
+.faw-annotation-badge {
+  position: absolute; transform: translate(-50%, -50%);
+  min-width: 26px; height: 26px; padding: 0 5px;
+  background: var(--primary); color: var(--primary-foreground);
+  border-radius: 13px; display: flex; align-items: center; justify-content: center;
+  font-size: 0.8em; font-weight: 600; cursor: pointer;
+  border: 2px solid white; box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+  user-select: none;
+}
+.faw-annotation-badge.faw-correct { background: #28a745; }
+.faw-annotation-badge.faw-incorrect { background: var(--destructive, #dc3545); }
+.faw-annotation-badge.faw-dragging { opacity: 0.5; }
+.faw-annotation-target {
+  position: absolute; transform: translate(-50%, -50%);
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 2px solid #28a745; background: rgba(40, 167, 69, 0.25);
+  pointer-events: none;
+}

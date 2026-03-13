@@ -8,6 +8,7 @@ const isWatch = process.argv.includes('--watch');
 
 const buildConfig = {
   entryPoints: [
+    'src/annotation.js',
     'src/concept-map.js',
     'src/flashcard.js',
     'src/labeling.js',
