@@ -20,7 +20,7 @@ class FlashcardWidget(anywidget.AnyWidget):
         value (dict): State with 'results' (per-card ratings/attempts) and 'complete'
     """
 
-    _esm = Path(__file__).parent / "static" / "flashcard.js"
+    _esm = Path(__file__).parent / "public" / "flashcard.js"
 
     question = traitlets.Unicode("").tag(sync=True)
     cards = traitlets.List().tag(sync=True)

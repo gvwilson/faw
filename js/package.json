@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node build.js",
     "watch": "node build.js --watch",
-    "clean": "rm -rf ../src/faw/static"
+    "clean": "rm -rf ../src/faw/public"
   },
   "keywords": [
     "education",

@@ -18,7 +18,7 @@ class MultipleChoiceWidget(anywidget.AnyWidget):
     """
 
     # Load JavaScript from external file
-    _esm = Path(__file__).parent / "static" / "multiple-choice.js"
+    _esm = Path(__file__).parent / "public" / "multiple-choice.js"
 
     # Traitlets
     question = traitlets.Unicode("").tag(sync=True)

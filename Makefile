@@ -18,13 +18,14 @@ check:
 
 ## clean: clean up
 clean:
-	@rm -rf ./dist ./src/faw/static
+	@rm -rf ./dist ./src/faw/public
 	@find . -path './.venv' -prune -o -type d -name '__pycache__' -exec rm -rf {} +
 	@find . -path './.venv' -prune -o -type f -name '*~' -exec rm {} +
 
 ## docs: build documentation
 docs:
 	@mkdocs build
+	@marimo export html-wasm --force --mode edit --sandbox demo.py -o docs/demo.html
 	@touch docs/.nojekyll
 	@cp etc/docs-requirements.txt docs/requirements.txt
 

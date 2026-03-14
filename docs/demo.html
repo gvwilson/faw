@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        const scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          const element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          const newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((_entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>demo</title>
+    <script type="module" crossorigin src="./assets/index-DyRdaW9o.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-TXkS1QI3.js">
+    <link rel="modulepreload" crossorigin href="./assets/clsx-A78R3nYl.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-d_A4rA-x.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-LvLJmgfZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-Bj1aDYRI.js">
+    <link rel="modulepreload" crossorigin href="./assets/compiler-runtime-B3qBwwSJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-CP2fAiZX.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-CNBv2dAU.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-CjXriKgk.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-BmOH9agK.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-CSu739Rf.js">
+    <link rel="modulepreload" crossorigin href="./assets/Combination-tjZP3FH6.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-Bs2e3wuf.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CIU0Lack.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-BvP5LBIs.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-BnZGcuDh.js">
+    <link rel="modulepreload" crossorigin href="./assets/x-yqLqiq5Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-DygbgNTD.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-DOQlecCr.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BhMe50aT.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-BGESiCQL.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-BU8KB_Ip.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-WUlsM6MC.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-awXiPaF0.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-BkJc8lDE.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-DnJbrtRQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-H_cgTO0M.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-CORJ8yYa.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-D2igisxY.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-ImXS-885.js">
+    <link rel="modulepreload" crossorigin href="./assets/DeferredRequestRegistry-CMZsNx4R.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-CdR60lKM.js">
+    <link rel="modulepreload" crossorigin href="./assets/session-DnMOyddG.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-D9X9QKiL.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-DZy_SQ_v.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-BGkTcW3U.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-DlRqgfqz.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-39dTX4Wi.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-QS_pSfjY.js">
+    <link rel="modulepreload" crossorigin href="./assets/assertNever-Dw9aFN4h.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-BKEr35uH.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-BDXC6oVR.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-BY4jV7Yb.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-CwdqVOYu.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-DRC4SgqY.js">
+    <link rel="modulepreload" crossorigin href="./assets/capabilities-CeYo4YI0.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-BcTiTw8T.js">
+    <link rel="modulepreload" crossorigin href="./assets/paths-bMgYkaP2.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DUY6xZX8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D89dID68.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CU-Ty5ht.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BjtLy-VA.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-odxAaH5Z.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Dq_iQ08e.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DfBASypd.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-51xFOPFs.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CEQIJ2pn.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-FMMSUPAS.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-DDAiY7kz.js">
+    <link rel="modulepreload" crossorigin href="./assets/purify.es-CPplrWRQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/cjs-CVt8hZ5L.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-DuoFhI7N.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-GB_lFVaq.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-DIo_1hTm.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-D8CkpJG7.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Cl1doThW.js">
+    <link rel="modulepreload" crossorigin href="./assets/database-zap-B3efE3T2.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-Cmx6WhDY.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-CCtxWKxf.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-DCSoZZhh.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-_z3dkNFy.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-CKhrfxsx.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-CVbqSkT8.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-BJEd-iA7.js">
+    <link rel="modulepreload" crossorigin href="./assets/multi-map-kCmlVJ-5.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-0YTlkh9P.js">
+    <link rel="modulepreload" crossorigin href="./assets/card-WPBELA1S.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DsNfSYaw.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-BXzvlof-.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BTEPE6IB.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-DmqkEXI4.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-BUC67G8E.js">
+    <link rel="modulepreload" crossorigin href="./assets/azure-Ddr1pZpW.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-44Cj1Me-.js">
+    <link rel="modulepreload" crossorigin href="./assets/SSRProvider-DC7ElCZZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-B1_BdDTF.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-DMA_kIIZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/usePress-DsLftN-x.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-BPldEXfy.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-BKV6zi_7.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-Cvl9xY6R.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-tdkZNn4k.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-FXVKPW36.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-DVm0BCFt.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-Bfogio62.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-R2OkQKR0.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-DMCkK2TI.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-BCOZVFBt.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-6uJrSKbw.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-irHJCpFh.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-CAR4dOiD.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-B-s-VRHt.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-DeCFDX1B.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-DtQaB9NM.js">
+    <link rel="modulepreload" crossorigin href="./assets/triangle-alert-n1-FF7zs.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-C3Y44M85.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-OkOxlkkM.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-BOmLQIKI.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DK1MWd7f.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser-CZV6_g2i.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-D_HRHf_c.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-dVj6GVNE.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-jGxNsOWc.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-CRNJOvqT.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-B59Kn5nL.js">
+    <link rel="modulepreload" crossorigin href="./assets/datasource-B2Fl6iYU.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-D2jTOQOG.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-B0ZtYqUC.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-6RnnFDPt.js">
+    <link rel="modulepreload" crossorigin href="./assets/html-to-image-b9BimK8l.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-ShrwcKIv.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-BdX_Y5NA.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-5FQGJX7Z-BJDu6jwt.js">
+    <link rel="modulepreload" crossorigin href="./assets/katex-rvFxOCU-.js">
+    <link rel="modulepreload" crossorigin href="./assets/markdown-renderer-B6a5ZAwT.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-DQqqP-WF.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-BTm4CTKr.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-qh-NzTWO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useIframeCapabilities-T3alJPda.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-C3K3rlAZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-DBqDb4Nb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-D3F4nmET.js">
+    <link rel="modulepreload" crossorigin href="./assets/dates-CzBDvj6R.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-8VTEe-0T.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-aq1t6BkR.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-D7FeWASw.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-CmtFqjqu.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-BGa3qZre.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CeILsq6V.js">
+    <link rel="modulepreload" crossorigin href="./assets/JsonOutput-BSyDxU0G.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-BAfiIxKf.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-B9sHgc9n.js">
+    <link rel="modulepreload" crossorigin href="./assets/process-output-4yip1nZE.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-CObhN-9g.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-Dxmp_Bd_.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-BQUzYly2.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-DVwc11C3.js">
+    <link rel="modulepreload" crossorigin href="./assets/play-D4Tdvkms.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai--4VOMvH8.js">
+    <link rel="modulepreload" crossorigin href="./assets/isEmpty-9KlyX4nB.js">
+    <link rel="modulepreload" crossorigin href="./assets/bot-message-square-BzawfL5p.js">
+    <link rel="modulepreload" crossorigin href="./assets/chat-display-Co6iGNSx.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-F2DZENgf.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-4zY5Dv0P.js">
+    <link rel="modulepreload" crossorigin href="./assets/spec-Be-iRLAY.js">
+    <link rel="modulepreload" crossorigin href="./assets/components-CF9x5raB.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-BQP0K_pZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-BhEcsHTu.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-BlB0Ba6E.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-sD4fbzpH.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-BEHvSeoM.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-resizable-panels.browser.esm-RgA6v8U3.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-aware-panel-D7ygyp92.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-BWK_nLJy.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-BRlAqdmq.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-DgTL09j7.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-DmjbJYSq.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-Fa5c_iPb.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-code-D9wtWSiR.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-DFiYrN2w.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-BOzRCrXK.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-B7_NRa34.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-DGtw6Lae.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-eWwLICkT.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-D1hTncYV.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-BhvWC48z.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-DRf51_gT.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-1hBRXVlM.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-Dzwrcr75.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-C_qcB35v.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-36rMhJTw.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BeVScbIo.js">
+    <link rel="modulepreload" crossorigin href="./assets/code-xml-BMv1Dtd2.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-BG-iMGgV.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-oV8Csj8Y.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-DD8FJvQ_.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-_LzfhNmX.js">
+    <link rel="stylesheet" crossorigin href="./assets/cells-jmgGt1lS.css">
+    <link rel="stylesheet" crossorigin href="./assets/markdown-renderer-DdDKmWlR.css">
+    <link rel="stylesheet" crossorigin href="./assets/JsonOutput-B7vuddcd.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-DrPzoH7F.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">%23%20%2F%2F%2F%20script%0A%23%20requires-python%20%3D%20%22%3D%3D3.12%22%0A%23%20dependencies%20%3D%20%5B%0A%23%20%20%20%20%20%22anywidget%22%2C%0A%23%20%20%20%20%20%22faw%3E%3D0.8.0%22%2C%0A%23%20%20%20%20%20%22marimo%22%2C%0A%23%20%5D%0A%23%20%2F%2F%2F%0A%0A%22%22%22%0AExample%20Marimo%20Notebook%3A%20Education%20Widgets%20Demo%0A%0AThis%20notebook%20demonstrates%20all%20three%20educational%20widgets.%0ARun%20with%3A%20marimo%20edit%20example_notebook.py%0A%22%22%22%0A%0Aimport%20marimo%0A%0A__generated_with%20%3D%20%220.20.4%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%0A%20%20%20%20return%20(mo%2C)%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20from%20faw%20import%20(%0A%20%20%20%20%20%20%20%20ConceptMapWidget%2C%0A%20%20%20%20%20%20%20%20FlashcardWidget%2C%0A%20%20%20%20%20%20%20%20LabelingWidget%2C%0A%20%20%20%20%20%20%20%20MatchingWidget%2C%0A%20%20%20%20%20%20%20%20MultipleChoiceWidget%2C%0A%20%20%20%20%20%20%20%20OrderingWidget%2C%0A%20%20%20%20)%0A%0A%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20ConceptMapWidget%2C%0A%20%20%20%20%20%20%20%20FlashcardWidget%2C%0A%20%20%20%20%20%20%20%20LabelingWidget%2C%0A%20%20%20%20%20%20%20%20MatchingWidget%2C%0A%20%20%20%20%20%20%20%20MultipleChoiceWidget%2C%0A%20%20%20%20%20%20%20%20OrderingWidget%2C%0A%20%20%20%20)%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%20Educational%20Widgets%20Demo%0A%0A%20%20%20%20This%20notebook%20demonstrates%20interactive%20self-test%20questions.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Concept%20Map%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(ConceptMapWidget%2C%20mo)%3A%0A%20%20%20%20concept_map%20%3D%20mo.ui.anywidget(%0A%20%20%20%20%20%20%20%20ConceptMapWidget(%0A%20%20%20%20%20%20%20%20%20%20%20%20question%3D%22Map%20the%20relationships%20between%20these%20Python%20concepts%3A%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20concepts%3D%5B%22function%22%2C%20%22parameter%22%2C%20%22argument%22%2C%20%22return%20value%22%2C%20%22call%20site%22%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20terms%3D%5B%22defines%22%2C%20%22accepts%22%2C%20%22supplies%22%2C%20%22produces%22%2C%20%22invokes%22%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20correct_edges%3D%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%22from%22%3A%20%22function%22%2C%20%22to%22%3A%20%22parameter%22%2C%20%22label%22%3A%20%22accepts%22%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%22from%22%3A%20%22function%22%2C%20%22to%22%3A%20%22return%20value%22%2C%20%22label%22%3A%20%22produces%22%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%22from%22%3A%20%22call%20site%22%2C%20%22to%22%3A%20%22argument%22%2C%20%22label%22%3A%20%22supplies%22%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%22from%22%3A%20%22argument%22%2C%20%22to%22%3A%20%22parameter%22%2C%20%22label%22%3A%20%22defines%22%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%22from%22%3A%20%22call%20site%22%2C%20%22to%22%3A%20%22function%22%2C%20%22label%22%3A%20%22invokes%22%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20)%0A%20%20%20%20concept_map%0A%20%20%20%20return%20(concept_map%2C)%0A%0A%0A%40app.cell%0Adef%20_(concept_map%2C%20mo)%3A%0A%20%20%20%20def%20concept_map_msg(widget)%3A%0A%20%20%20%20%20%20%20%20val%20%3D%20widget.value.get(%22value%22)%20or%20%7B%7D%0A%20%20%20%20%20%20%20%20score%20%3D%20val.get(%22score%22)%0A%20%20%20%20%20%20%20%20total%20%3D%20val.get(%22total%22%2C%205)%0A%20%20%20%20%20%20%20%20if%20score%20is%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20%22Draw%20connections%20between%20concepts%20to%20see%20your%20score.%22%0A%20%20%20%20%20%20%20%20msg%20%3D%20f%22**%7Bscore%7D%2F%7Btotal%7D**%20correct%20connection%7B's'%20if%20total%20!%3D%201%20else%20''%7D%22%0A%20%20%20%20%20%20%20%20if%20val.get(%22correct%22)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20msg%20%2B%3D%20%22%20%E2%80%94%20complete!%22%0A%20%20%20%20%20%20%20%20return%20msg%0A%0A%20%20%20%20mo.md(concept_map_msg(concept_map))%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Flashcard%20Deck%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(FlashcardWidget%2C%20mo)%3A%0A%20%20%20%20flashcard_deck%20%3D%20mo.ui.anywidget(%0A%20%20%20%20%20%20%20%20FlashcardWidget(%0A%20%20%20%20%20%20%20%20%20%20%20%20question%3D%22Python%20Concepts%20%E2%80%94%20rate%20yourself%20on%20each%20card%3A%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20cards%3D%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22front%22%3A%20%22What%20does%20a%20list%20comprehension%20look%20like%3F%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22back%22%3A%20%22%5Bexpr%20for%20item%20in%20iterable%20if%20condition%5D%20%E2%80%94%20e.g.%2C%20%5Bx**2%20for%20x%20in%20range(10)%20if%20x%20%25%202%20%3D%3D%200%5D%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22front%22%3A%20%22What%20is%20the%20difference%20between%20a%20list%20and%20a%20tuple%3F%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22back%22%3A%20%22Lists%20are%20mutable%20(can%20be%20changed%20after%20creation)%3B%20tuples%20are%20immutable%20(cannot%20be%20changed).%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22front%22%3A%20%22What%20does%20the%20%60*args%60%20parameter%20do%20in%20a%20function%20definition%3F%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22back%22%3A%20%22It%20collects%20any%20number%20of%20positional%20arguments%20into%20a%20tuple%20named%20%60args%60.%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22front%22%3A%20%22What%20is%20a%20Python%20generator%3F%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22back%22%3A%20%22A%20function%20that%20uses%20%60yield%60%20to%20produce%20values%20one%20at%20a%20time%2C%20pausing%20between%20each%2C%20without%20building%20the%20full%20sequence%20in%20memory.%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22front%22%3A%20%22What%20does%20%60if%20__name__%20%3D%3D%20'__main__'%3A%60%20do%3F%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22back%22%3A%20%22It%20runs%20the%20indented%20code%20only%20when%20the%20file%20is%20executed%20directly%2C%20not%20when%20it%20is%20imported%20as%20a%20module.%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22front%22%3A%20%22What%20is%20the%20difference%20between%20%60is%60%20and%20%60%3D%3D%60%20in%20Python%3F%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22back%22%3A%20%22%60%3D%3D%60%20tests%20value%20equality%3B%20%60is%60%20tests%20identity%20(whether%20two%20names%20refer%20to%20the%20exact%20same%20object%20in%20memory).%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20shuffle%3DTrue%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20)%0A%20%20%20%20flashcard_deck%0A%20%20%20%20return%20(flashcard_deck%2C)%0A%0A%0A%40app.cell%0Adef%20_(flashcard_deck%2C%20mo)%3A%0A%20%20%20%20def%20flashcard_progress(widget)%3A%0A%20%20%20%20%20%20%20%20val%20%3D%20widget.value.get(%22value%22)%20or%20%7B%7D%0A%20%20%20%20%20%20%20%20results%20%3D%20val.get(%22results%22%2C%20%7B%7D)%0A%20%20%20%20%20%20%20%20counts%20%3D%20%7B%22got_it%22%3A%200%2C%20%22almost%22%3A%200%2C%20%22no%22%3A%200%7D%0A%20%20%20%20%20%20%20%20for%20r%20in%20results.values()%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20counts%5Br%5B%22rating%22%5D%5D%20%3D%20counts.get(r%5B%22rating%22%5D%2C%200)%20%2B%201%0A%20%20%20%20%20%20%20%20return%20len(results)%2C%20counts%2C%20val.get(%22complete%22%2C%20False)%0A%0A%20%20%20%20_rated%2C%20_counts%2C%20_complete%20%3D%20flashcard_progress(flashcard_deck)%0A%20%20%20%20mo.md(f%22%22%22%0A%20%20%20%20**Progress%3A**%20%7B_rated%7D%20card(s)%20rated%20%E2%80%94%0A%20%20%20%20%E2%9C%93%20Got%20it%3A%20%7B_counts%5B%22got_it%22%5D%7D%20%26nbsp%3B%0A%20%20%20%20~%20Almost%3A%20%7B_counts%5B%22almost%22%5D%7D%20%26nbsp%3B%0A%20%20%20%20%E2%9C%97%20No%3A%20%7B_counts%5B%22no%22%5D%7D%0A%20%20%20%20%7B%22%26nbsp%3B%20%F0%9F%8E%89%20Deck%20complete!%22%20if%20_complete%20else%20%22%22%7D%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Labeling%20Question%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(LabelingWidget%2C%20mo)%3A%0A%20%20%20%20labeling_question%20%3D%20mo.ui.anywidget(%0A%20%20%20%20%20%20%20%20LabelingWidget(%0A%20%20%20%20%20%20%20%20%20%20%20%20question%3D%22Label%20the%20parts%20of%20this%20Python%20code%3A%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20labels%3D%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Variable%20declaration%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Function%20call%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22String%20literal%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Arithmetic%20operation%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20text_lines%3D%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22name%20%3D%20'Alice'%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22age%20%3D%2025%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22result%20%3D%20age%20%2B%205%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22print(name)%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20correct_labels%3D%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%200%3A%20%5B0%2C%202%5D%2C%20%20%23%20Line%200%3A%20labels%200%20and%202%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%201%3A%20%5B0%5D%2C%20%20%23%20Line%201%3A%20label%200%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%202%3A%20%5B0%2C%203%5D%2C%20%20%23%20Line%202%3A%20labels%200%20and%203%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%203%3A%20%5B1%5D%2C%20%20%23%20Line%203%3A%20label%201%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20)%0A%20%20%20%20labeling_question%0A%20%20%20%20return%20(labeling_question%2C)%0A%0A%0A%40app.cell%0Adef%20_(labeling_question%2C%20mo)%3A%0A%20%20%20%20_val%20%3D%20labeling_question.value.get(%22value%22)%20or%20%7B%7D%0A%20%20%20%20_total%20%3D%20_val.get(%22total%22%2C%200)%0A%20%20%20%20_msg%20%3D%20f%22Score%3A%20%7B_val%5B'score'%5D%7D%2F%7B_total%7D%22%20if%20_total%20%3E%200%20else%20%22Not%20submitted%20yet%22%0A%20%20%20%20mo.md(f%22**%7B_msg%7D**%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Matching%20Question%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(MatchingWidget%2C%20mo)%3A%0A%20%20%20%20matching_question%20%3D%20mo.ui.anywidget(%0A%20%20%20%20%20%20%20%20MatchingWidget(%0A%20%20%20%20%20%20%20%20%20%20%20%20question%3D%22Match%20the%20programming%20languages%20to%20their%20primary%20paradigms%3A%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20left%3D%5B%22Python%22%2C%20%22Haskell%22%2C%20%22C%22%2C%20%22SQL%22%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20right%3D%5B%22Functional%22%2C%20%22Procedural%22%2C%20%22Multi-paradigm%22%2C%20%22Declarative%22%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20correct_matches%3D%7B0%3A%202%2C%201%3A%200%2C%202%3A%201%2C%203%3A%203%7D%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20)%0A%20%20%20%20matching_question%0A%20%20%20%20return%20(matching_question%2C)%0A%0A%0A%40app.cell%0Adef%20_(matching_question%2C%20mo)%3A%0A%20%20%20%20_val%20%3D%20matching_question.value.get(%22value%22)%20or%20%7B%7D%0A%20%20%20%20_msg%20%3D%20f%22Score%3A%20%7B_val%5B'score'%5D%7D%2F%7B_val%5B'total'%5D%7D%22%20if%20_val%20else%20%22Not%20answered%20yet%22%0A%20%20%20%20mo.md(f%22**%7B_msg%7D**%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Multiple%20Choice%20Question%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(MultipleChoiceWidget%2C%20mo)%3A%0A%20%20%20%20multiple_choice_question%20%3D%20mo.ui.anywidget(%0A%20%20%20%20%20%20%20%20MultipleChoiceWidget(%0A%20%20%20%20%20%20%20%20%20%20%20%20question%3D%22What%20is%20the%20capital%20of%20France%3F%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20options%3D%5B%22London%22%2C%20%22Berlin%22%2C%20%22Paris%22%2C%20%22Madrid%22%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20correct_answer%3D2%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20explanation%3D%22Paris%20has%20been%20the%20capital%20of%20France%20since%20the%2012th%20century.%22%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20)%0A%20%20%20%20multiple_choice_question%0A%20%20%20%20return%20(multiple_choice_question%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo%2C%20multiple_choice_question)%3A%0A%20%20%20%20_val%20%3D%20multiple_choice_question.value.get(%22value%22)%20or%20%7B%7D%0A%20%20%20%20if%20_val.get(%22answered%22)%3A%0A%20%20%20%20%20%20%20%20_msg%20%3D%20%22Score%3A%201%2F1%22%20if%20_val.get(%22correct%22)%20else%20%22Score%3A%200%2F1%22%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20_msg%20%3D%20%22Not%20answered%20yet%22%0A%20%20%20%20mo.md(f%22**%7B_msg%7D**%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20%23%23%20Ordering%20Question%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(OrderingWidget%2C%20mo)%3A%0A%20%20%20%20ordering_question%20%3D%20mo.ui.anywidget(%0A%20%20%20%20%20%20%20%20OrderingWidget(%0A%20%20%20%20%20%20%20%20%20%20%20%20question%3D%22Arrange%20these%20steps%20of%20the%20scientific%20method%20in%20the%20correct%20order%3A%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20items%3D%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Ask%20a%20question%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Do%20background%20research%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Construct%20a%20hypothesis%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Test%20with%20an%20experiment%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Analyze%20data%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22Draw%20conclusions%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%5D%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20shuffle%3DTrue%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20)%0A%20%20%20%20ordering_question%0A%20%20%20%20return%20(ordering_question%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo%2C%20ordering_question)%3A%0A%20%20%20%20_val%20%3D%20ordering_question.value.get(%22value%22)%20or%20%7B%7D%0A%20%20%20%20if%20_val.get(%22correct%22)%20is%20not%20None%20and%20_val.get(%22order%22)%3A%0A%20%20%20%20%20%20%20%20_msg%20%3D%20%22Score%3A%201%2F1%22%20if%20_val.get(%22correct%22)%20else%20%22Score%3A%200%2F1%22%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20_msg%20%3D%20%22Not%20answered%20yet%22%0A%20%20%20%20mo.md(f%22**%7B_msg%7D**%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%22%22%22%0A%20%20%20%20---%0A%0A%20%20%20%20%23%23%20Quiz%20Results%20Summary%0A%0A%20%20%20%20You%20can%20access%20the%20values%20from%20all%20widgets%20to%20create%20a%20summary%20or%20scoring%20system.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20concept_map%2C%0A%20%20%20%20flashcard_deck%2C%0A%20%20%20%20matching_question%2C%0A%20%20%20%20mo%2C%0A%20%20%20%20multiple_choice_question%2C%0A%20%20%20%20ordering_question%2C%0A)%3A%0A%20%20%20%20def%20widget_val(widget)%3A%0A%20%20%20%20%20%20%20%20return%20widget.value.get(%22value%22)%20or%20%7B%7D%0A%0A%20%20%20%20def%20calculate_score()%3A%0A%20%20%20%20%20%20%20%20score%20%3D%200%0A%20%20%20%20%20%20%20%20total%20%3D%200%0A%20%20%20%20%20%20%20%20for%20val%2C%20answered_key%2C%20correct_key%20in%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20(widget_val(concept_map)%2C%20%22score%22%2C%20%22correct%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20(widget_val(matching_question)%2C%20%22score%22%2C%20%22correct%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20(widget_val(multiple_choice_question)%2C%20%22answered%22%2C%20%22correct%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20(widget_val(ordering_question)%2C%20%22order%22%2C%20%22correct%22)%2C%0A%20%20%20%20%20%20%20%20%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20val.get(answered_key)%20is%20not%20None%20and%20val.get(answered_key)%20is%20not%20False%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20total%20%2B%3D%201%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20val.get(correct_key)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20score%20%2B%3D%201%0A%20%20%20%20%20%20%20%20fc%20%3D%20widget_val(flashcard_deck)%0A%20%20%20%20%20%20%20%20if%20fc.get(%22results%22)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20total%20%2B%3D%201%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20fc.get(%22complete%22)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20score%20%2B%3D%201%0A%20%20%20%20%20%20%20%20return%20score%2C%20total%0A%0A%20%20%20%20score%2C%20total%20%3D%20calculate_score()%0A%20%20%20%20mo.md(f%22%22%22%0A%20%20%20%20%23%23%23%20Current%20Score%3A%20%7Bscore%7D%2F%7Btotal%7D%0A%0A%20%20%20%20%7B%22%F0%9F%8E%89%20Perfect%20score!%22%20if%20score%20%3D%3D%20total%20and%20total%20%3E%200%20else%20%22Keep%20going!%22%20if%20total%20%3E%200%20else%20%22Answer%20the%20questions%20above%20to%20see%20your%20score.%22%7D%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "cwd": "",
+            "mode": "edit",
+            "version": "0.20.4",
+            "serverToken": "unused",
+            "config": {"ai": {"custom_providers": {}, "models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false, "signature_hint_on_typing": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "medium", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": false}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": false, "auto_reload": "off", "default_csv_encoding": "utf-8", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "compact"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>

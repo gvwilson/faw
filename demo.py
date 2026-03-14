@@ -1,3 +1,12 @@
+# /// script
+# requires-python = "==3.12"
+# dependencies = [
+#     "anywidget",
+#     "faw>=0.8.0",
+#     "marimo",
+# ]
+# ///
+
 """
 Example Marimo Notebook: Education Widgets Demo
 
@@ -46,6 +55,51 @@ def _(mo):
 
     This notebook demonstrates interactive self-test questions.
     """)
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md("""
+    ## Concept Map
+    """)
+    return
+
+
+@app.cell
+def _(ConceptMapWidget, mo):
+    concept_map = mo.ui.anywidget(
+        ConceptMapWidget(
+            question="Map the relationships between these Python concepts:",
+            concepts=["function", "parameter", "argument", "return value", "call site"],
+            terms=["defines", "accepts", "supplies", "produces", "invokes"],
+            correct_edges=[
+                {"from": "function", "to": "parameter", "label": "accepts"},
+                {"from": "function", "to": "return value", "label": "produces"},
+                {"from": "call site", "to": "argument", "label": "supplies"},
+                {"from": "argument", "to": "parameter", "label": "defines"},
+                {"from": "call site", "to": "function", "label": "invokes"},
+            ],
+        )
+    )
+    concept_map
+    return (concept_map,)
+
+
+@app.cell
+def _(concept_map, mo):
+    def concept_map_msg(widget):
+        val = widget.value.get("value") or {}
+        score = val.get("score")
+        total = val.get("total", 5)
+        if score is None:
+            return "Draw connections between concepts to see your score."
+        msg = f"**{score}/{total}** correct connection{'s' if total != 1 else ''}"
+        if val.get("correct"):
+            msg += " — complete!"
+        return msg
+
+    mo.md(concept_map_msg(concept_map))
     return
 
 
@@ -113,51 +167,6 @@ def _(flashcard_deck, mo):
     ✗ No: {_counts["no"]}
     {"&nbsp; 🎉 Deck complete!" if _complete else ""}
     """)
-    return
-
-
-@app.cell
-def _(mo):
-    mo.md("""
-    ## Concept Map
-    """)
-    return
-
-
-@app.cell
-def _(ConceptMapWidget, mo):
-    concept_map = mo.ui.anywidget(
-        ConceptMapWidget(
-            question="Map the relationships between these Python concepts:",
-            concepts=["function", "parameter", "argument", "return value", "call site"],
-            terms=["defines", "accepts", "supplies", "produces", "invokes"],
-            correct_edges=[
-                {"from": "function", "to": "parameter", "label": "accepts"},
-                {"from": "function", "to": "return value", "label": "produces"},
-                {"from": "call site", "to": "argument", "label": "supplies"},
-                {"from": "argument", "to": "parameter", "label": "defines"},
-                {"from": "call site", "to": "function", "label": "invokes"},
-            ],
-        )
-    )
-    concept_map
-    return (concept_map,)
-
-
-@app.cell
-def _(concept_map, mo):
-    def concept_map_msg(widget):
-        val = widget.value.get("value") or {}
-        score = val.get("score")
-        total = val.get("total", 5)
-        if score is None:
-            return "Draw connections between concepts to see your score."
-        msg = f"**{score}/{total}** correct connection{'s' if total != 1 else ''}"
-        if val.get("correct"):
-            msg += " — complete!"
-        return msg
-
-    mo.md(concept_map_msg(concept_map))
     return
 
 

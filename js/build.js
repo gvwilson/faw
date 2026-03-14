@@ -17,7 +17,7 @@ const buildConfig = {
   ],
   bundle: true,
   format: 'esm',
-  outdir: '../src/faw/static',
+  outdir: '../src/faw/public',
   minify: false,
   sourcemap: true,
   logLevel: 'info',
