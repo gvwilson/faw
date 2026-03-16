@@ -50,8 +50,7 @@ function render({ model, el }) {
   const ratingRow = mk('div', 'faw-rating-btns'); ratingRow.style.display = 'none';
   const gotItBtn  = mk('button', 'faw-btn faw-btn-primary', '✓ Got it');
   const almostBtn = mk('button', 'faw-btn faw-btn-secondary', '~ Almost');
-  const noBtn     = mk('button', 'faw-btn', '✗ No');
-  noBtn.style.background = '#dc3545';
+  const noBtn     = mk('button', 'faw-btn faw-btn-danger', '✗ No');
   ratingRow.append(gotItBtn, almostBtn, noBtn);
   container.appendChild(ratingRow);
 

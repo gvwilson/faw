@@ -20,7 +20,7 @@ class ConceptMapWidget(anywidget.AnyWidget):
         value (dict): State with 'edges', 'score', 'total', and 'correct' keys
     """
 
-    _esm = Path(__file__).parent / "public" / "concept-map.js"
+    _esm = Path(__file__).parent / "static" / "concept-map.js"
 
     question = traitlets.Unicode("").tag(sync=True)
     concepts = traitlets.List(trait=traitlets.Unicode()).tag(sync=True)

@@ -1,6 +1,7 @@
-.faw {
+// src/styles.css
+var styles_default = `.faw {
   padding: 4px 0;
-  /* Semantic color tokens — override in dark mode below */
+  /* Semantic color tokens \u2014 override in dark mode below */
   --faw-correct-bg: #d4edda;
   --faw-correct-color: #28a745;
   --faw-incorrect-bg: #f8d7da;
@@ -11,7 +12,7 @@
   --faw-neutral-color: #94a3b8;
 }
 
-/* Dark mode overrides — matches marimo's theme toggle selectors */
+/* Dark mode overrides \u2014 matches marimo's theme toggle selectors */
 .dark .faw, .dark-theme .faw, [data-theme="dark"] .faw {
   --faw-correct-bg: #14532d;
   --faw-correct-color: #4ade80;
@@ -162,3 +163,71 @@
 .faw-cm-edge-label { padding: 2px 8px; background: var(--accent); border-radius: 10px; font-size: 0.85em; font-weight: 500; }
 .faw-cm-edge-remove { margin-left: auto; background: none; border: none; cursor: pointer; color: var(--muted-foreground); padding: 2px 4px; border-radius: 4px; }
 .faw-cm-edge-remove:hover { color: var(--destructive); background: var(--faw-incorrect-bg); }
+`;
+
+// src/multiple-choice.js
+function mk(tag, cls, txt) {
+  const el = document.createElement(tag);
+  if (cls) el.className = cls;
+  if (txt !== void 0) el.textContent = txt;
+  return el;
+}
+function render({ model, el }) {
+  const s = mk("style");
+  s.textContent = styles_default;
+  el.appendChild(s);
+  const container = mk("div", "faw");
+  container.appendChild(mk("div", "faw-question", model.get("question")));
+  const opts = mk("div", "faw-options");
+  const options = model.get("options");
+  const correct = model.get("correct_answer");
+  let answered = false;
+  const feedbackEl = mk("div");
+  feedbackEl.style.display = "none";
+  const explanationEl = mk("div");
+  explanationEl.style.display = "none";
+  options.forEach((text, i) => {
+    const div = mk("div", "faw-option");
+    const radio = mk("input");
+    radio.type = "radio";
+    radio.name = "answer";
+    radio.value = i;
+    radio.id = `opt-${i}`;
+    radio.style.marginRight = "10px";
+    const lbl = mk("label");
+    lbl.htmlFor = `opt-${i}`;
+    lbl.textContent = text;
+    lbl.style.cursor = "pointer";
+    div.append(radio, lbl);
+    const select = () => {
+      if (answered) return;
+      radio.checked = true;
+      answered = true;
+      [...opts.children].forEach((opt, j) => {
+        opt.classList.add("faw-answered", j === correct ? "faw-correct" : j === i ? "faw-incorrect" : "faw-faded");
+      });
+      const ok = i === correct;
+      feedbackEl.textContent = ok ? "\u2713 Correct!" : "\u2717 Incorrect";
+      feedbackEl.className = `faw-feedback ${ok ? "faw-correct" : "faw-incorrect"}`;
+      feedbackEl.style.display = "block";
+      const expl = model.get("explanation");
+      if (expl) {
+        explanationEl.textContent = expl;
+        explanationEl.className = "faw-explanation";
+        explanationEl.style.display = "block";
+      }
+      model.set("value", { selected: i, correct: ok, answered: true });
+      model.save_changes();
+    };
+    div.addEventListener("click", select);
+    radio.addEventListener("change", select);
+    opts.appendChild(div);
+  });
+  container.append(opts, feedbackEl, explanationEl);
+  el.appendChild(container);
+}
+var multiple_choice_default = { render };
+export {
+  multiple_choice_default as default
+};
+//# sourceMappingURL=multiple-choice.js.map

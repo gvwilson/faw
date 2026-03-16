@@ -40,9 +40,9 @@ function render({ model, el }) {
     const m = mks('marker', { id: mid, viewBox: '0 0 10 10', refX: '9', refY: '5', markerWidth: '6', markerHeight: '6', orient: 'auto' });
     const p = mks('path', { d: 'M0,0 L10,5 L0,10 z' }); p.style.fill = color; m.appendChild(p); return m;
   };
-  defs.appendChild(mkMarker(`cm-n-${id}`, '#94a3b8'));
-  defs.appendChild(mkMarker(`cm-ok-${id}`, '#28a745'));
-  defs.appendChild(mkMarker(`cm-err-${id}`, '#dc3545'));
+  defs.appendChild(mkMarker(`cm-n-${id}`, 'var(--faw-neutral-color)'));
+  defs.appendChild(mkMarker(`cm-ok-${id}`, 'var(--faw-correct-color)'));
+  defs.appendChild(mkMarker(`cm-err-${id}`, 'var(--destructive)'));
   svg.appendChild(defs);
   workspace.appendChild(svg);
 
@@ -181,7 +181,7 @@ function render({ model, el }) {
       const x1 = fp.x + ux * rFrom, y1 = fp.y + uy * rFrom;
       const x2 = tp.x - ux * rTo,   y2 = tp.y - uy * rTo;
 
-      const color  = edge.correct === true ? '#28a745' : edge.correct === false ? '#dc3545' : '#94a3b8';
+      const color  = edge.correct === true ? 'var(--faw-correct-color)' : edge.correct === false ? 'var(--destructive)' : 'var(--faw-neutral-color)';
       const mId    = edge.correct === true ? `cm-ok-${id}` : edge.correct === false ? `cm-err-${id}` : `cm-n-${id}`;
 
       const line = mks('line', { x1, y1, x2, y2, 'stroke-width': 2 });

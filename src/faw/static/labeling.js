@@ -1,6 +1,7 @@
-.faw {
+// src/styles.css
+var styles_default = `.faw {
   padding: 4px 0;
-  /* Semantic color tokens — override in dark mode below */
+  /* Semantic color tokens \u2014 override in dark mode below */
   --faw-correct-bg: #d4edda;
   --faw-correct-color: #28a745;
   --faw-incorrect-bg: #f8d7da;
@@ -11,7 +12,7 @@
   --faw-neutral-color: #94a3b8;
 }
 
-/* Dark mode overrides — matches marimo's theme toggle selectors */
+/* Dark mode overrides \u2014 matches marimo's theme toggle selectors */
 .dark .faw, .dark-theme .faw, [data-theme="dark"] .faw {
   --faw-correct-bg: #14532d;
   --faw-correct-color: #4ade80;
@@ -162,3 +163,146 @@
 .faw-cm-edge-label { padding: 2px 8px; background: var(--accent); border-radius: 10px; font-size: 0.85em; font-weight: 500; }
 .faw-cm-edge-remove { margin-left: auto; background: none; border: none; cursor: pointer; color: var(--muted-foreground); padding: 2px 4px; border-radius: 4px; }
 .faw-cm-edge-remove:hover { color: var(--destructive); background: var(--faw-incorrect-bg); }
+`;
+
+// src/labeling.js
+function mk(tag, cls, txt) {
+  const el = document.createElement(tag);
+  if (cls) el.className = cls;
+  if (txt !== void 0) el.textContent = txt;
+  return el;
+}
+function render({ model, el }) {
+  const s = mk("style");
+  s.textContent = styles_default;
+  el.appendChild(s);
+  const container = mk("div", "faw");
+  container.appendChild(mk("div", "faw-question", model.get("question")));
+  container.appendChild(mk("div", "faw-instructions", "Drag label numbers to text lines. Drag outside to remove."));
+  const labels = model.get("labels"), textLines = model.get("text_lines"), correctLabels = model.get("correct_labels");
+  const placed = {};
+  let submitted = false;
+  const area = mk("div", "faw-labeling-area");
+  const labelsCol = mk("div", "faw-labeling-labels"), textCol = mk("div", "faw-labeling-text");
+  labelsCol.appendChild(mk("div", "faw-labeling-title", "Available Labels:"));
+  textCol.appendChild(mk("div", "faw-labeling-title", "Text:"));
+  labels.forEach((text, i) => {
+    const item = mk("div", "faw-label-item");
+    const num = mk("span", "faw-label-num", i + 1);
+    num.draggable = true;
+    num.addEventListener("dragstart", (e) => {
+      if (submitted) return;
+      e.dataTransfer.effectAllowed = "copy";
+      e.dataTransfer.setData("text/plain", i);
+      num.classList.add("faw-dragging");
+    });
+    num.addEventListener("dragend", () => num.classList.remove("faw-dragging"));
+    item.append(num, mk("span", "faw-label-text", text));
+    labelsCol.appendChild(item);
+  });
+  const linesEl = mk("div", "faw-text-lines");
+  function renderBadges(zone, lineIdx) {
+    zone.innerHTML = "";
+    (placed[lineIdx] || []).forEach((li) => {
+      const b = mk("span", "faw-label-badge", li + 1);
+      b.draggable = !submitted;
+      b.dataset.labelIndex = li;
+      if (!submitted) {
+        b.addEventListener("dragstart", (e) => {
+          e.dataTransfer.effectAllowed = "move";
+          e.dataTransfer.setData("text/plain", JSON.stringify({ li, from: lineIdx }));
+          b.classList.add("faw-dragging");
+        });
+        b.addEventListener("dragend", (e) => {
+          b.classList.remove("faw-dragging");
+          if (e.clientX < textCol.getBoundingClientRect().left) {
+            placed[lineIdx] = placed[lineIdx].filter((x) => x !== li);
+            if (!placed[lineIdx].length) delete placed[lineIdx];
+            renderBadges(zone, lineIdx);
+            sync();
+          }
+        });
+      }
+      zone.appendChild(b);
+    });
+  }
+  textLines.forEach((text, lineIdx) => {
+    const line = mk("div", "faw-text-line");
+    const zone = mk("div", "faw-label-drop-zone");
+    zone.addEventListener("dragover", (e) => {
+      if (submitted) return;
+      e.preventDefault();
+      zone.classList.add("faw-drop-target");
+    });
+    zone.addEventListener("dragleave", () => zone.classList.remove("faw-drop-target"));
+    zone.addEventListener("drop", (e) => {
+      if (submitted) return;
+      e.preventDefault();
+      zone.classList.remove("faw-drop-target");
+      let li, from = null;
+      const raw = e.dataTransfer.getData("text/plain");
+      try {
+        const d = JSON.parse(raw);
+        if (typeof d === "object" && d !== null) {
+          li = d.li;
+          from = d.from;
+        } else {
+          li = d;
+        }
+      } catch {
+        li = parseInt(raw);
+      }
+      if (from !== null && from !== lineIdx) {
+        placed[from] = placed[from].filter((x) => x !== li);
+        if (!placed[from].length) delete placed[from];
+        renderBadges(linesEl.children[from].querySelector(".faw-label-drop-zone"), from);
+      }
+      if (!placed[lineIdx]) placed[lineIdx] = [];
+      if (!placed[lineIdx].includes(li)) placed[lineIdx].push(li);
+      renderBadges(zone, lineIdx);
+      sync();
+    });
+    line.append(zone, mk("div", "faw-text-content", text));
+    linesEl.appendChild(line);
+  });
+  textCol.appendChild(linesEl);
+  area.append(labelsCol, textCol);
+  container.appendChild(area);
+  const submitBtn = mk("button", "faw-btn faw-btn-primary", "Check Labels");
+  submitBtn.style.marginTop = "16px";
+  submitBtn.addEventListener("click", () => {
+    if (submitted) return;
+    submitted = true;
+    submitBtn.disabled = true;
+    labelsCol.querySelectorAll(".faw-label-num").forEach((n) => {
+      n.draggable = false;
+      n.style.cursor = "default";
+    });
+    const total = Object.values(correctLabels).reduce((s2, a) => s2 + a.length, 0);
+    let score = 0;
+    linesEl.querySelectorAll(".faw-text-line").forEach((line, lineIdx) => {
+      line.querySelectorAll(".faw-label-badge").forEach((b) => {
+        const ok = (correctLabels[lineIdx] || []).includes(parseInt(b.dataset.labelIndex));
+        if (ok) score++;
+        b.classList.add(ok ? "faw-correct" : "faw-incorrect");
+      });
+    });
+    const pct = total ? Math.round(score / total * 100) : 0;
+    container.appendChild(mk("div", `faw-feedback ${score === total ? "faw-correct" : "faw-incorrect"}`, `Score: ${score}/${total} correct (${pct}%)`));
+    model.set("value", { placed_labels: placed, score, total, correct: score === total });
+    model.save_changes();
+  });
+  container.appendChild(submitBtn);
+  el.appendChild(container);
+  function sync() {
+    if (!submitted) {
+      model.set("value", { placed_labels: placed, score: 0, total: 0, correct: false });
+      model.save_changes();
+    }
+  }
+}
+var labeling_default = { render };
+export {
+  labeling_default as default
+};
+//# sourceMappingURL=labeling.js.map

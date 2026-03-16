@@ -2,7 +2,7 @@
 # requires-python = "==3.12"
 # dependencies = [
 #     "anywidget",
-#     "faw>=0.8.0",
+#     "faw>=0.9.0",
 #     "marimo",
 # ]
 # ///
